@@ -1,0 +1,35 @@
+@startuml Exercice1_Q1
+
+title Exercice 1 - Question 1 : Unités de combat
+
+abstract class UniteDeCombat {
+  - xp : int
+  - hp : int
+  - x : int
+  - y : int
+
+  + move(x:int, y:int) : void
+  + rest(d:int) : void
+  + display() : String
+  + attack(target: UniteDeCombat) : void
+  + take_damage(i:int) : void
+}
+
+class Guerrier
+class Espion
+class Sorcier
+
+UniteDeCombat <|-- Guerrier
+UniteDeCombat <|-- Espion
+UniteDeCombat <|-- Sorcier
+
+class Commandant {
+  - units : List<UniteDeCombat>
+  + create_warrior() : Guerrier
+  + create_spy() : Espion
+  + create_wizard() : Sorcier
+}
+
+Commandant "1" o-- "*" UniteDeCombat : cree / commande
+
+@enduml

@@ -1,0 +1,56 @@
+@startuml Exercice1_Q2
+
+title Exercice 1 - Question 2 : Composite
+
+interface IUniteDeCombat {
+  + move(x:int, y:int) : void
+  + rest(d:int) : void
+  + display() : String
+  + attack(target:IUniteDeCombat) : void
+  + take_damage(i:int) : void
+}
+
+abstract class UniteDeCombatBase {
+  - xp : int
+  - hp : int
+  - x : int
+  - y : int
+
+  + rest(d:int) : void
+  + take_damage(i:int) : void
+}
+
+IUniteDeCombat <|.. UniteDeCombatBase
+
+class Guerrier
+class Espion
+class Sorcier
+
+UniteDeCombatBase <|-- Guerrier
+UniteDeCombatBase <|-- Espion
+UniteDeCombatBase <|-- Sorcier
+
+class GroupeUnites {
+  - children : List<IUniteDeCombat>
+  + add(unit:IUniteDeCombat) : void
+  + remove(unit:IUniteDeCombat) : void
+  + move(x:int, y:int) : void
+  + rest(d:int) : void
+  + display() : String
+  + attack(target:IUniteDeCombat) : void
+  + take_damage(i:int) : void
+}
+
+IUniteDeCombat <|.. GroupeUnites
+
+class Commandant {
+  - units : List<IUniteDeCombat>
+  + create_warrior() : Guerrier
+  + create_spy() : Espion
+  + create_wizard() : Sorcier
+  + create_group() : GroupeUnites
+}
+
+Commandant "1" o-- "*" IUniteDeCombat : gere
+
+@enduml
