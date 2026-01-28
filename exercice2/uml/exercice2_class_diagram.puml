@@ -1,0 +1,33 @@
+@startuml Exercice2
+title Exercice 2 - Fleuriste
+
+class Fleur {
+  - id: str
+  - espece: str
+  - date_coupe: date
+  - qualite: str
+  - prix: float
+}
+
+class Facture {
+  - id: str
+  - client: str
+  - date_vente: date
+  - bouquet: List<Fleur>
+  - prix_vente: float
+}
+
+class CarteDeFidelite {
+  - client: str
+  - factures: List<Facture>
+  - niveau: str
+  + ajouter_facture(f: Facture) : void
+  + reset_historique() : void
+  + calculer_niveau() : str
+  + factures_entre(debut: date, fin: date) : List<Facture>
+}
+
+CarteDeFidelite "1" o-- "*" Facture
+Facture "*" o-- "*" Fleur
+
+@enduml
