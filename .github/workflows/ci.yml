@@ -22,8 +22,9 @@ jobs:
           pip install pytest
 
       - name: Run tests
-        working-directory: exercice1
         run: |
-          pytest
+          python -m pytest
+        env:
+          PYTHONPATH: ${{ github.workspace }}/exercice1
 
           
